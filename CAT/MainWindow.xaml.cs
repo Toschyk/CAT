@@ -24,5 +24,15 @@ namespace CAT
         {
             InitializeComponent();
         }
+
+        private void StartLongOperation(object sender, RoutedEventArgs e)
+        {
+            // Симуляция долгой операции, которая блокирует UI
+            for (int i = 0; i < 1000000000; i++)
+            {
+                // Просто вычисления, которые замедляют приложение
+                double result = Math.Sqrt(i);
+            }
+        }
     }
 }
