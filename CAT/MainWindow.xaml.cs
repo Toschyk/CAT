@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -20,7 +21,6 @@ namespace CAT
     /// </summary>
     public partial class MainWindow : Window
     {
-        private List<int> _data = new List<int>();
 
         public MainWindow()
         {
@@ -29,11 +29,15 @@ namespace CAT
 
         private void StartLongOperation(object sender, RoutedEventArgs e)
         {
-            // Симуляция утечки памяти
-            for (int i = 0; i < 1000000; i++)
+            Thread backgroundThread = new Thread(() =>
             {
-                _data.Add(i);  // Добавление данных без удаления
-            }
+                for (int i = 0; i < 1000000000; i++)
+                {
+                    double result = Math.Sqrt(i);
+                }
+            });
+
+            backgroundThread.Start();
         }
     }
 }
