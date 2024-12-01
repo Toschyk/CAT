@@ -20,6 +20,8 @@ namespace CAT
     /// </summary>
     public partial class MainWindow : Window
     {
+        private List<int> _data = new List<int>();
+
         public MainWindow()
         {
             InitializeComponent();
@@ -27,11 +29,10 @@ namespace CAT
 
         private void StartLongOperation(object sender, RoutedEventArgs e)
         {
-            // Симуляция долгой операции, которая блокирует UI
-            for (int i = 0; i < 1000000000; i++)
+            // Симуляция утечки памяти
+            for (int i = 0; i < 1000000; i++)
             {
-                // Просто вычисления, которые замедляют приложение
-                double result = Math.Sqrt(i);
+                _data.Add(i);  // Добавление данных без удаления
             }
         }
     }
